@@ -31,6 +31,40 @@
       <h1>Lista de Filmes</h1>
       <p>Escolha abaixo o filme desejado!</p>
     </main>
+    <div class="container" id="filmes-container"></div>
+    <script>
+      fetch("/filmes")
+        .then(res => {
+          if (!res.ok) throw new Error("Erro na resposta do servidor");
+          return res.json();
+        })
+        .then(filmes => {
+          const container = document.getElementById("filmes-container");
+          filmes.forEach(filme => {
+            const card = document.createElement("div");
+            card.className = "filme";
+            card.innerHTML = `
+        <h2>${filme.nome}</h2>
+        <p><strong>Gênero:</strong> ${filme.genero || 'Sem gênero'}</p>
+        <p><strong>Lançamento:</strong> ${filme.lancamento}</p>
+        <p><strong>Duração:</strong> ${filme.duracao}</p>
+        <p><strong>Sinopse:</strong> ${filme.sinopse}</p>
+        ${filme.imagem ? `<img src="data:image/png;base64,${arrayBufferToBase64(filme.imagem.data)}" alt="Imagem do filme">` : ""}
+      `;
+            container.appendChild(card);
+          });
+        })
+        .catch(err => console.error(err));
+
+      function arrayBufferToBase64(bufferData) {
+        let binary = '';
+        const bytes = bufferData;
+        for (let b of bytes) {
+          binary += String.fromCharCode(b);
+        }
+        return window.btoa(binary);
+      }
+    </script>
     <footer class="rodape-bg">
       <div class="rodape">
         <p>S.O.S Filmes - 2025 Todos os direitos reservados</p>

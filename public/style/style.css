@@ -272,6 +272,27 @@ button:hover {
   background-color: #c03e30;
 }
 
+/* Lista de Filmes */
+
+#filmes-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 40px;
+}
+
+#filmes-container h2 {
+  margin-bottom: 15px;
+}
+
+#filmes-container p {
+  margin-bottom: 10px;
+}
+
+#filmes-container img {
+  max-width: 340px;
+  border-radius: 4px;
+}
+
 /* Responsivo */
 @media (max-width: 768px) {
   .form {
