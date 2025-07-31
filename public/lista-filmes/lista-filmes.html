@@ -44,13 +44,15 @@
             const card = document.createElement("div");
             card.className = "filme";
             card.innerHTML = `
-        <h2>${filme.nome}</h2>
-        <p><strong>Gênero:</strong> ${filme.genero || 'Sem gênero'}</p>
-        <p><strong>Lançamento:</strong> ${filme.lancamento}</p>
-        <p><strong>Duração:</strong> ${filme.duracao}</p>
-        <p><strong>Sinopse:</strong> ${filme.sinopse}</p>
-        ${filme.imagem ? `<img src="data:image/png;base64,${arrayBufferToBase64(filme.imagem.data)}" alt="Imagem do filme">` : ""}
-      `;
+              ${filme.imagem ? `<img src="data:image/png;base64,${arrayBufferToBase64(filme.imagem.data)}" alt="Imagem do filme">` : ""}
+                <div class="filme-info">
+                  <h2>${filme.nome}</h2>
+                  <p><strong>Gênero:</strong> ${filme.genero || 'Sem gênero'}</p>
+                  <p><strong>Lançamento:</strong> ${filme.lancamento}</p>
+                  <p><strong>Duração:</strong> ${filme.duracao}</p>
+                </div>
+                <p class="sinopse"><strong>Sinopse:</strong> ${filme.sinopse}</p>
+             `;
             container.appendChild(card);
           });
         })
