@@ -44,15 +44,34 @@
             const card = document.createElement("div");
             card.className = "filme";
             card.innerHTML = `
-              ${filme.imagem ? `<img src="data:image/png;base64,${arrayBufferToBase64(filme.imagem.data)}" alt="Imagem do filme">` : ""}
-                <div class="filme-info">
-                  <h2>${filme.nome}</h2>
-                  <p><strong>Gênero:</strong> ${filme.genero || 'Sem gênero'}</p>
-                  <p><strong>Lançamento:</strong> ${filme.lancamento}</p>
-                  <p><strong>Duração:</strong> ${filme.duracao}</p>
-                </div>
-                <p class="sinopse"><strong>Sinopse:</strong> ${filme.sinopse}</p>
+              <img 
+                src="data:image/png;base64,${arrayBufferToBase64(filme.imagem.data)}" 
+                alt="${filme.nome}" 
+                class="filme-thumb"
+                data-nome="${filme.nome}"
+                data-genero="${filme.genero}"
+                data-lancamento="${filme.lancamento}"
+                data-duracao="${filme.duracao}"
+                data-sinopse="${filme.sinopse}"
+              />
              `;
+
+            // Adiciona o evento de clique para abrir o modal
+            card.querySelector("img").addEventListener("click", function () {
+              document.getElementById("modal-img").src = this.src;
+              document.getElementById("modal-nome").textContent = this.dataset.nome;
+              document.getElementById("modal-genero").textContent = this.dataset.genero;
+              document.getElementById("modal-lancamento").textContent = this.dataset.lancamento;
+              document.getElementById("modal-duracao").textContent = this.dataset.duracao;
+              document.getElementById("modal-sinopse").textContent = this.dataset.sinopse;
+
+              document.getElementById("modal").classList.remove("hidden");
+
+              document.getElementById("fechar-modal").addEventListener("click", () => {
+                document.getElementById("modal").classList.add("hidden");
+              });
+            });
+
             container.appendChild(card);
           });
         })
@@ -67,12 +86,28 @@
         return window.btoa(binary);
       }
     </script>
+    <div id="modal" class="modal hidden">
+      <div class="modal-content">
+        <span id="fechar-modal" class="fechar">&times;</span>
+        <div class="modal-filme">
+          <img id="modal-img" src="" alt="Imagem do filme" />
+          <div class="filme-info">
+            <h2 id="modal-nome"></h2>
+            <p><strong>Gênero:</strong> <span id="modal-genero"></span></p>
+            <p><strong>Lançamento:</strong> <span id="modal-lancamento"></span></p>
+            <p><strong>Duração:</strong> <span id="modal-duracao"></span></p>
+            <p class="sinopse"><strong>Sinopse:</strong> <span id="modal-sinopse"></span></p>
+          </div>
+        </div>
+      </div>
+    </div>
     <footer class="rodape-bg">
       <div class="rodape">
         <p>S.O.S Filmes - 2025 Todos os direitos reservados</p>
       </div>
     </footer>
   </div>
+  <script src="script.js"></script>
 </body>
 
 </html>
