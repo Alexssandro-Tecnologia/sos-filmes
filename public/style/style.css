@@ -272,6 +272,19 @@ button:hover {
   background-color: #c03e30;
 }
 
+/* Mensagem de cadastro */
+
+.mensagem-sucesso {
+  padding: 20px;
+  border-radius: 5px;
+  background-color: #eeeff3;
+  color: #345372;
+  margin: 0 auto;
+  max-width: 300px;
+  font-size: 18px;
+  font-weight: bold;
+}
+
 /* Lista de Filmes */
 
 #filmes-container {

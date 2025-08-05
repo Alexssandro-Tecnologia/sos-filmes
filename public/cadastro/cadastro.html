@@ -30,7 +30,7 @@
     <h1>Cadastro de Filmes</h1>
     <p>O seu melhor catálogo aqui!</p>
     <div class="formulario">
-      <form class="form" action="/processa-cadastro" method="POST" enctype="multipart/form-data">
+      <form id="form-cadastro" class="form" enctype="multipart/form-data">
         <!-- FOTO (coluna 1) -->
         <div class="foto-upload">
           <label for="foto" class="upload-area">Escolher Arquivo</label>
@@ -84,12 +84,15 @@
         </div>
       </form>
     </div>
+    <div id="mensagem" class="mensagem-sucesso"></div>
   </main>
   <footer class="rodape-bg">
     <div class="rodape">
       <p>S.O.S Filmes - 2025 Todos os direitos reservados</p>
     </div>
   </footer>
+
+  <script src="../script.js"></script>
 </body>
 
 </html>
