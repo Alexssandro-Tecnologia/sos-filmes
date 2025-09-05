@@ -50,3 +50,79 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 });
+
+// Edição e Exclusão de Filmes
+
+document.addEventListener("DOMContentLoaded", () => {
+  const generoSelect = document.getElementById("genero");
+  const campoNome = document.getElementById("campo-nome");
+  const formPesquisa = document.getElementById("form-pesquisa");
+  const resultados = document.getElementById("resultados");
+
+  // Mostrar input de nome apenas se a opção "nome" for escolhida
+  generoSelect.addEventListener("change", () => {
+    if (generoSelect.value === "nome") {
+      campoNome.style.display = "block";
+    } else {
+      campoNome.style.display = "none";
+    }
+  });
+
+  // Enviar pesquisa
+  formPesquisa.addEventListener("submit", async (e) => {
+    e.preventDefault();
+
+    let url = "/filmes";
+    if (generoSelect.value && generoSelect.value !== "nome") {
+      url += `?genero=${generoSelect.value}`;
+    } else if (generoSelect.value === "nome") {
+      const nome = document.getElementById("nome").value;
+      url += `?nome=${encodeURIComponent(nome)}`;
+    }
+
+    try {
+      const res = await fetch(url);
+      const filmes = await res.json();
+
+      resultados.innerHTML = "";
+      filmes.forEach((filme) => {
+        const div = document.createElement("div");
+        div.innerHTML = `
+          <p><strong>${filme.nome}</strong> (${filme.genero})</p>
+          <button data-id="${filme.id}" class="btn-editar">Editar</button>
+          <button data-id="${filme.id}" class="btn-excluir">Excluir</button>
+        `;
+        resultados.appendChild(div);
+      });
+    } catch (err) {
+      console.error("Erro ao buscar filmes:", err);
+    }
+  });
+
+  // Edicao e Exclusão de filmes
+
+  resultados.addEventListener("click", async (e) => {
+    const id = e.target.dataset.id;
+
+    // EXCLUIR
+    if (e.target.classList.contains("btn-excluir")) {
+      if (confirm("Deseja excluir este filme?")) {
+        await fetch(`/filmes/${id}`, { method: "DELETE" });
+        e.target.parentElement.remove();
+      }
+    }
+
+    // EDITAR
+    if (e.target.classList.contains("btn-editar")) {
+      const novoNome = prompt("Digite o novo nome do filme:");
+      if (novoNome) {
+        await fetch(`/filmes/${id}`, {
+          method: "PUT",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ nome: novoNome }),
+        });
+        alert("Filme atualizado!");
+      }
+    }
+  });
+});

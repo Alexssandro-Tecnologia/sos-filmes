@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../style/style.css">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Comic+Neue:wght@300;400;700&family=Poppins&display=swap" rel="stylesheet">
+
+  <title>Lista de Filmes</title>
+</head>
+
+<body>
+  <div class="container-geral">
+    <header class="cabecario-bg">
+      <nav class="cabecario">
+        <a href="../index.html"><img src="../img/banner.png" alt=""></a>
+        <ul>
+          <li><a href="../cadastro/cadastro.html">cadastrar</a></li>
+          <li><a href="../lista-filmes/lista-filmes.html">lista de filmes</a></li>
+          <li><a href="../edicao-filmes/edicao-filmes.html">editar</a></li>
+        </ul>
+      </nav>
+    </header>
+    <main class="container conteudo">
+      <h1>Edição de Filmes</h1>
+      <p>Edite ou exclua o filme selecionado!</p>
+      <div class="formulario">
+        <form id="form-pesquisa">
+          <div class="form-edicao">
+            <div>
+              <label for="genero">Pesquisar por gênero ou nome</label>
+              <select id="genero">
+                <option value="">Selecione</option>
+                <option value="nome">Nome</option>
+                <option value="acao">Ação</option>
+                <option value="animacao">Animação</option>
+                <option value="aventura">Aventura</option>
+                <option value="comedia">Comédia</option>
+                <option value="drama">Drama</option>
+                <option value="fantasia">Fantasia</option>
+                <option value="ficcao-cientifica">Ficção-científica</option>
+                <option value="romance">Romance</option>
+                <option value="suspense">Suspense</option>
+                <option value="terror">Terror</option>
+              </select>
+            </div>
+
+            <div id="campo-nome" style="display:none;">
+              <label for="nome">Digite o nome do filme</label>
+              <input type="text" id="nome" placeholder="Ex: Matrix">
+            </div>
+
+            <button type="submit">Pesquisar</button>
+          </div>
+        </form>
+      </div>
+      <!-- Aqui saem os resultados -->
+      <div id="resultados"></div>
+    </main>
+    <footer class="rodape-bg">
+      <div class="rodape">
+        <p>S.O.S Filmes - 2025 Todos os direitos reservados</p>
+      </div>
+    </footer>
+  </div>
+  <script src="../script.js"></script>
+</body>
+
+</html>
